@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,12 +23,17 @@ public class MainActivity extends AppCompatActivity {
 
     public static class PlaceholderFragment extends Fragment{
 
+        ArrayAdapter<String> forecastDataAdapter;
+        List<String> weekForecast;
+
+
         public PlaceholderFragment() {
         }
 
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
             String[] data = {
                     "Mon 6/23 - Sunny - 31/17",
                     "Tue 6/24 - Foggy - 21/8",
@@ -37,7 +43,18 @@ public class MainActivity extends AppCompatActivity {
                     "Sat 6/28 - TRAPPED IN WEATHERSTATION - 23/18",
                     "Sun 6/29 - Sunny - 20/7"
             };
-            List<String> weekForecast = new ArrayList<String>(Arrays.asList)
+
+            weekForecast = new ArrayList<String>(Arrays.asList(data));
+
+            forecastDataAdapter =
+                    new ArrayAdapter<String>(
+                            getActivity(),
+                            R.layout.list_item_forecast,R.id.list_item_forecast_textview,weekForecast);
+
+            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            return rootView;
+
+
         }
     }
 }
